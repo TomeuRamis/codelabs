@@ -1,8 +1,9 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
+import { from, fromEvent, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { HousingService } from '../housing.service';
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city" #filter>
+        <input id="filter" type="text" placeholder="Filter by city" #filter>
         <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
@@ -26,13 +27,23 @@ export class HomeComponent {
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
   filterHousingLocationList: HousingLocation[]  = [];
+  @ViewChild('filter') filterInput: ElementRef | null= null;
 
   constructor(){
-    this.housingService.getAllHousingLocations()
-    .then((housingLocationList: HousingLocation[]) => {
+    from(this.housingService.getAllHousingLocations())
+    .pipe()
+    .subscribe( (housingLocationList) => {
       this.housingLocationList = housingLocationList;
-      this.filterHousingLocationList = housingLocationList;
+      this.filterHousingLocationList = this.housingLocationList;
     })
+  }
+
+  ngAfterViewInit() {
+    fromEvent<InputEvent>(this.filterInput?.nativeElement, 'input')
+    .pipe(map((event: InputEvent) => { return this.filterInput?.nativeElement.value}))
+    .subscribe((filter: string) => {
+      this.filterResults(filter);
+    });
   }
 
   filterResults(filter: string) {

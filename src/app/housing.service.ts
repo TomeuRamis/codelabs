@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HousingLocation } from './housing-location';
-import { last } from 'rxjs';
+import { delay, last } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,14 @@ export class HousingService {
 
   async getAllHousingLocations(): Promise<HousingLocation[]> {
     const data = await fetch(this.url);
+    // Simulate late server response
+    await new Promise(f => setTimeout(f, 3000));
     return await data.json() ?? [];
   }
 
   async getHousingLocationById(id: Number): Promise<HousingLocation | undefined> {
     const data = await fetch(`${this.url}/${id}`);
+    await new Promise(f => setTimeout(f, 1000));
     return await data.json() ?? [];
   }
 
