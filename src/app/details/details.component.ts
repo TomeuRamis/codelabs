@@ -6,10 +6,9 @@ import { HousingLocation } from '../housing-location';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-details',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-details',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
       <article>
         <img [src]="housingLocation?.photo" alt="" class="listing-photo">
         <section class="listing-description">
@@ -46,7 +45,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
           </form>
         </section>
   `,
-  styleUrls: ['./details.component.css']
+    styleUrls: ['./details.component.css']
 })
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);

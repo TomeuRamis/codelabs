@@ -6,10 +6,9 @@ import { HousingService } from '../housing.service';
 import { from, fromEvent, map, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, HousingLocationComponent],
-  template: `
+    selector: 'app-home',
+    imports: [CommonModule, HousingLocationComponent],
+    template: `
     <section>
       <form>
         <input id="filter" type="text" placeholder="Filter by city" #filter>
@@ -21,7 +20,7 @@ import { from, fromEvent, map, Observable } from 'rxjs';
       <app-housing-location *ngFor="let housingLocation of filterHousingLocationList" [housingLocation]="housingLocation"></app-housing-location>
     </section>
   `,
-  styleUrls: ['./home.component.css'],
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
   housingLocationList: HousingLocation[] = [];
