@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { HousingLocation } from '../housing-location';
+import { HousingLocation } from '../store/models';
 import { HousingService } from '../housing-service/housing.service';
 import { from, fromEvent, map, Observable } from 'rxjs';
 
