@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HousingLocation } from '../store/models';
-import { delay, last } from 'rxjs';
+import { delay, last, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
