@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { housingLocationReducer } from './store/reducers';
 
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  template: `
     <main>
       <header class="brand-name">
         <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true">
@@ -13,8 +15,8 @@ import { RouterModule } from '@angular/router';
       </section>
     </main>
     `,
-    styleUrls: ['./app.component.css'],
-    imports: [RouterModule]
+  styleUrls: ['./app.component.css'],
+  imports: [RouterModule]
 })
 export class AppComponent {
   title = 'homes';

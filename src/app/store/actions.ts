@@ -1,11 +1,11 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { HousingLocation } from "./models";
+import { housingLocationReducer } from "./reducers";
 
 export const HousingLocationActions = createActionGroup({
-    source: 'HousingLocaations',
+    source: 'HousingLocations',
     events: {
-        'Load Housing Locations': emptyProps(),
-        'Get Housing Location By Id': props<{ housingLocationId: number }>(),
+        'Load Housing Locations': props<{ housingLocations: ReadonlyArray<HousingLocation>}>(),
         'Add Housing Location': props<{ housingLocation: HousingLocation}>(),
     }
 })
