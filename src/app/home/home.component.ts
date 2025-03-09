@@ -31,7 +31,6 @@ export class HomeComponent {
 
   constructor(){
     from(this.housingService.getAllHousingLocations())
-    .pipe()
     .subscribe( (housingLocationList) => {
       this.housingLocationList = housingLocationList;
       this.filterHousingLocationList = this.housingLocationList;
@@ -50,7 +49,13 @@ export class HomeComponent {
     if (!filter) this.filterHousingLocationList = this.housingLocationList;
 
     this.filterHousingLocationList = this.housingLocationList.filter(
-      (housingLocation) => housingLocation?.city.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+      (housingLocation) => this.filterHousingLocation(housingLocation, filter)
     )
+  }
+
+  filterHousingLocation(housingLocation: HousingLocation, filter: string): boolean {  
+    return housingLocation?.city.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
+    housingLocation?.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
+    housingLocation?.state.toLocaleLowerCase().includes(filter.toLocaleLowerCase());
   }
 }
